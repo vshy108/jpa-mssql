@@ -1,5 +1,9 @@
 package org.hopenghou.SpringBootApi.entity;
 
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.geo.Point;
 
 import jakarta.persistence.*;
@@ -25,6 +29,12 @@ public class Location {
 
   @Column(columnDefinition = "geography", nullable = false)
   private Point north_east;
+
+  @CreatedDate
+  private Instant createdDate;
+
+  @LastModifiedDate
+  private Instant lastModifiedDate;
 
   // Getters
   public Long getId() {
