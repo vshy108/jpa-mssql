@@ -1,14 +1,17 @@
 package org.hopenghou.SpringBootApi.service;
 
 import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
+import org.hopenghou.SpringBootApi.dto.ListLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.repository.LocationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 
-import java.util.List;
 import java.util.Optional;
  
 /**
@@ -46,8 +49,18 @@ public class LocationService {
      *
      * @return the list of entities
      */
-    public List<Location> getAllLocations() {
-        return locationRepository.findAll();
+    public Page<Location> getAllLocations(ListLocationDto params) {
+        PageRequest pageRequest;
+        int pageIndexZero = params.getPageIndexZero();
+        int pageSize = params.getPageSize();
+        String columnName =  params.getColumnName();
+        boolean isAscending = params.getIsAscending();
+
+        pageRequest = isAscending ? 
+            PageRequest.of(pageIndexZero, pageSize, Sort.by(columnName)) : 
+            PageRequest.of(pageIndexZero, pageSize, Sort.by(columnName).descending());
+
+        return locationRepository.findAll(pageRequest);
     }
  
     /**

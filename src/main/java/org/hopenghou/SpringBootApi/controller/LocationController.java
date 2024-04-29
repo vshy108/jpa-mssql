@@ -1,13 +1,14 @@
 package org.hopenghou.SpringBootApi.controller;
 
 import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
+import org.hopenghou.SpringBootApi.dto.ListLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.service.LocationService;
+import org.springframework.data.domain.Page;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
  
 @RestController
@@ -16,7 +17,6 @@ public class LocationController {
  
     private final LocationService locationService;
  
-    // @Autowired
     public LocationController(LocationService locationService) {
         this.locationService = locationService;
     }
@@ -36,11 +36,16 @@ public class LocationController {
     /**
      * Get all locations.
      *
-     * @return the ResponseEntity with status 200 (OK) and with body of the list of locations
+     * @return the ResponseEntity with status 200 (OK) and with body of the page of locations
      */
     @GetMapping("/locations")
-    public List<Location> getAllLocations() {
-        return locationService.getAllLocations();
+    public Page<Location> getAllLocations(
+        @RequestParam(defaultValue = "0", required = true) Integer pageIndexZero,
+        @RequestParam(defaultValue = "10", required = true) Integer pageSize,
+        @RequestParam(defaultValue = "id", required = true) String columnName,
+        @RequestParam(defaultValue = "true", required = true) Boolean isAscending) {
+        ListLocationDto dto = new ListLocationDto(pageIndexZero, pageSize, columnName, isAscending);
+        return locationService.getAllLocations(dto);
     }
  
     /**
@@ -55,6 +60,7 @@ public class LocationController {
         return location.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
  
+    // TODO: Update only isFavourite
     /**
      * Update a location by ID.
      *
