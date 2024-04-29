@@ -4,6 +4,7 @@ import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
 import org.hopenghou.SpringBootApi.dto.ListLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.repository.LocationRepository;
+import org.hopenghou.SpringBootApi.utility.Constant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -55,6 +56,19 @@ public class LocationService {
         int pageSize = params.getPageSize();
         String columnName =  params.getColumnName();
         boolean isAscending = params.getIsAscending();
+
+        boolean isValidColumnName = false;
+
+        for (String sortableColumnName : Constant.GetAllLocationsSortableColumnNames) {
+            if (columnName == sortableColumnName) {
+                isValidColumnName = true;
+            }
+        }
+
+        // Assume default columnName if the input columnName is invalid
+        if (!isValidColumnName) {
+            columnName = "id";
+        }
 
         pageRequest = isAscending ? 
             PageRequest.of(pageIndexZero, pageSize, Sort.by(columnName)) : 
