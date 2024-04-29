@@ -1,11 +1,12 @@
 package org.hopenghou.SpringBootApi.controller;
 
+import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.service.LocationService;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
- 
+
 import java.util.List;
 import java.util.Optional;
  
@@ -27,8 +28,8 @@ public class LocationController {
      * @return the ResponseEntity with status 200 (OK) and with body of the new location
      */
     @PostMapping("/location")
-    public ResponseEntity<Location> saveLocation(@RequestBody Location location) {
-        Location newLocation = locationService.saveLocation(location);
+    public ResponseEntity<Location> saveLocation(@RequestBody CreateLocationDto request) {
+        Location newLocation = locationService.saveLocation(request);
         return ResponseEntity.ok(newLocation);
     }
  

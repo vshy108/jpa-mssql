@@ -2,6 +2,7 @@ package org.hopenghou.SpringBootApi.entity;
 
 import java.time.Instant;
 
+import org.hopenghou.SpringBootApi.converter.SQLServerGeographyAttributeConverter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.geo.Point;
@@ -21,12 +22,15 @@ public class Location {
   @Column(nullable = false)
   private boolean is_favourite = false;
 
+  @Convert(converter = SQLServerGeographyAttributeConverter.class)
   @Column(columnDefinition = "geography", nullable = false)
   private Point center;
 
+  @Convert(converter = SQLServerGeographyAttributeConverter.class)
   @Column(columnDefinition = "geography", nullable = false)
   private Point south_west;
 
+  @Convert(converter = SQLServerGeographyAttributeConverter.class)
   @Column(columnDefinition = "geography", nullable = false)
   private Point north_east;
 
@@ -49,16 +53,36 @@ public class Location {
     return is_favourite;
   }
 
+  public Point getCenter() {
+    return center;
+  }
+
+  public Point getSouthWest() {
+    return south_west;
+  }
+
+  public Point getNorthEast() {
+    return north_east;
+  }
+
   // Setters
-  public void setId(Long id) {
-      this.id = id;
-  }
-
   public void setName(String name) {
-      this.name = name;
+    this.name = name;
   }
 
-  public void setIsFavourite(boolean is_favourite) {
-    this.is_favourite = is_favourite;
+  public void setIsFavourite(boolean isFavourite) {
+    this.is_favourite = isFavourite;
+  }
+
+  public void setCenter(Point center) {
+    this.center = center;
+  }
+
+  public void setSouthWest(Point southWest) {
+    this.south_west = southWest;
+  }
+
+  public void setNorthEast(Point northEast) {
+    this.north_east = northEast;
   }
 }

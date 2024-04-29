@@ -1,10 +1,12 @@
 package org.hopenghou.SpringBootApi.service;
 
+import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.repository.LocationRepository;
+import org.springframework.data.geo.Point;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
+
 import java.util.List;
 import java.util.Optional;
  
@@ -27,7 +29,13 @@ public class LocationService {
      * @param location the entity to save
      * @return the persisted entity
      */
-    public Location saveLocation(Location location) {
+    public Location saveLocation(CreateLocationDto request) {
+        Location location = new Location();
+        location.setName(request.getName());
+        location.setIsFavourite(request.getIsFavourite());
+        location.setCenter(new Point(request.getCenter().getLng(), request.getCenter().getLat()));
+        location.setNorthEast(new Point(request.getNorthEast().getLng(), request.getNorthEast().getLat()));
+        location.setSouthWest(new Point(request.getSouthWest().getLng(), request.getSouthWest().getLat()));
         return locationRepository.save(location);
     }
  
