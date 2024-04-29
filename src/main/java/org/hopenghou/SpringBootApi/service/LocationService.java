@@ -6,12 +6,15 @@ import org.hopenghou.SpringBootApi.repository.LocationRepository;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
  
 /**
  * Service class for managing Location entities.
  */
+@Transactional
 @Service
 public class LocationService {
  
