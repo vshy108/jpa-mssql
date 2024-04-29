@@ -1,7 +1,6 @@
 package org.hopenghou.SpringBootApi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.geo.Point;
 
 public class CreateLocationDto {
     private String name;
