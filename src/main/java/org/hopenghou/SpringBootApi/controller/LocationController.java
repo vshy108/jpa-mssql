@@ -16,6 +16,11 @@ import java.util.Optional;
 public class LocationController {
  
     private final LocationService locationService;
+    private static final String DEFAULT_PAGE_INDEX_ZERO = "0";
+    private static final String DEFAULT_PAGE_SIZE = "10";
+    private static final String DEFAULT_COLUMN_NAME = "id";
+    private static final String DEFAULT_IS_ASCENDING = "true";
+
  
     public LocationController(LocationService locationService) {
         this.locationService = locationService;
@@ -40,10 +45,10 @@ public class LocationController {
      */
     @GetMapping("/locations")
     public Page<Location> getAllLocations(
-        @RequestParam(defaultValue = "0", required = true) Integer pageIndexZero,
-        @RequestParam(defaultValue = "10", required = true) Integer pageSize,
-        @RequestParam(defaultValue = "id", required = true) String columnName,
-        @RequestParam(defaultValue = "true", required = true) Boolean isAscending) {
+        @RequestParam(defaultValue = DEFAULT_PAGE_INDEX_ZERO, required = true) Integer pageIndexZero,
+        @RequestParam(defaultValue = DEFAULT_PAGE_SIZE, required = true) Integer pageSize,
+        @RequestParam(defaultValue = DEFAULT_COLUMN_NAME, required = true) String columnName,
+        @RequestParam(defaultValue = DEFAULT_IS_ASCENDING, required = true) Boolean isAscending) {
         ListLocationDto dto = new ListLocationDto(pageIndexZero, pageSize, columnName, isAscending);
         return locationService.getAllLocations(dto);
     }
