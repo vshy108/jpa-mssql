@@ -13,6 +13,7 @@ import java.util.Optional;
  
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin // NOTE: temporary solution to work locally when no authentication is required
 public class LocationController {
  
     private final LocationService locationService;
