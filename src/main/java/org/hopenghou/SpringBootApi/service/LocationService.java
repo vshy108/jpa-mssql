@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.Point;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.transaction.Transactional;
 
@@ -102,7 +104,7 @@ public class LocationService {
             location.setIsFavourite(request.getIsFavourite());
             return locationRepository.save(location);
         } else {
-            throw new RuntimeException("Location not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Location not found");
         }
     }
  
