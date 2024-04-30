@@ -29,6 +29,10 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
    - Allows access to the React web application origin.
    - Configurable by changing the value of `cors.allowed.origins` in `application.properties`.
 
+8. **API Key Authentication**:
+   - Compare API key from request header X-API-KEY
+   - Configurable by changing the value of `api.key` in `application.properties`.
+
 ---
 
 ## Steps
