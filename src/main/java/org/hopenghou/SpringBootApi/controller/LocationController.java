@@ -2,15 +2,13 @@ package org.hopenghou.SpringBootApi.controller;
 
 import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
 import org.hopenghou.SpringBootApi.dto.ListLocationDto;
+import org.hopenghou.SpringBootApi.dto.UpdateLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.service.LocationService;
 import org.springframework.data.domain.Page;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
- 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin // NOTE: temporary solution to work locally when no authentication is required
@@ -54,19 +52,19 @@ public class LocationController {
         return locationService.getAllLocations(dto);
     }
  
-    /**
-     * Get a location by ID.
-     *
-     * @param id the ID of the location to get
-     * @return the ResponseEntity with status 200 (OK) and with body of the location, or with status 404 (Not Found) if the location does not exist
-     */
-    @GetMapping("/locations/{id}")
-    public ResponseEntity<Location> getLocationById(@PathVariable Long id) {
-        Optional<Location> location = locationService.getLocationById(id);
-        return location.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // /**
+    //  * Get a location by ID.
+    //  *
+    //  * @param id the ID of the location to get
+    //  * @return the ResponseEntity with status 200 (OK) and with body of the location, or with status 404 (Not Found) if the location does not exist
+    //  */
+    // @GetMapping("/locations/{id}")
+    // public ResponseEntity<Location> getLocationById(@PathVariable Long id) {
+    //     Optional<Location> location = locationService.getLocationById(id);
+    //     return location.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    // }
  
-    // TODO: Update only isFavourite
+    // For now, only allow to update isFavourite
     /**
      * Update a location by ID.
      *
@@ -75,8 +73,8 @@ public class LocationController {
      * @return the ResponseEntity with status 200 (OK) and with body of the updated location, or with status 404 (Not Found) if the location does not exist
      */
     @PutMapping("/locations/{id}")
-    public ResponseEntity<Location> updateLocation(@PathVariable Long id, @RequestBody Location location) {
-        Location updatedLocation = locationService.updateLocation(id, location);
+    public ResponseEntity<Location> updateLocation(@PathVariable Long id, @RequestBody UpdateLocationDto request) {
+        Location updatedLocation = locationService.updateLocation(id, request);
         return ResponseEntity.ok(updatedLocation);
     }
  

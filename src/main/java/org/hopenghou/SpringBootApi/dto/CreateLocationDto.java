@@ -10,9 +10,10 @@ public class CreateLocationDto {
     private boolean isFavourite;
 
     // Constructors
+    // NOTE: Avoid Cannot construct instance in controller arguments
     public CreateLocationDto() {
     }
-
+    
     public CreateLocationDto(String name, GeoPoint center, GeoPoint southWest, GeoPoint northEast, boolean isFavourite) {
         this.name = name;
         this.center = center;

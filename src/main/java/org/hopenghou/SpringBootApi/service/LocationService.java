@@ -2,6 +2,7 @@ package org.hopenghou.SpringBootApi.service;
 
 import org.hopenghou.SpringBootApi.dto.CreateLocationDto;
 import org.hopenghou.SpringBootApi.dto.ListLocationDto;
+import org.hopenghou.SpringBootApi.dto.UpdateLocationDto;
 import org.hopenghou.SpringBootApi.entity.Location;
 import org.hopenghou.SpringBootApi.repository.LocationRepository;
 import org.hopenghou.SpringBootApi.utility.Constant;
@@ -77,15 +78,15 @@ public class LocationService {
         return locationRepository.findAll(pageRequest);
     }
  
-    /**
-     * Get one location by ID.
-     *
-     * @param id the ID of the entity
-     * @return the entity
-     */
-    public Optional<Location> getLocationById(Long id) {
-        return locationRepository.findById(id);
-    }
+    // /**
+    //  * Get one location by ID.
+    //  *
+    //  * @param id the ID of the entity
+    //  * @return the entity
+    //  */
+    // public Optional<Location> getLocationById(Long id) {
+    //     return locationRepository.findById(id);
+    // }
  
     /**
      * Update a location.
@@ -94,11 +95,11 @@ public class LocationService {
      * @param updatedLocation the updated entity
      * @return the updated entity
      */
-    public Location updateLocation(Long id, Location updatedLocation) {
+    public Location updateLocation(Long id, UpdateLocationDto request) {
         Optional<Location> existingLocation = locationRepository.findById(id);
         if (existingLocation.isPresent()) {
             Location location = existingLocation.get();
-            location.setIsFavourite(updatedLocation.getIsFavourite());
+            location.setIsFavourite(request.getIsFavourite());
             return locationRepository.save(location);
         } else {
             throw new RuntimeException("Location not found");
