@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "cors.allowed.origins",
+  "type": "java.lang.String",
+  "description": "Allow React web applciation origin eg. http://localhost:5173"
+}]}

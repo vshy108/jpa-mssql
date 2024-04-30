@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin // NOTE: temporary solution to work locally when no authentication is required
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class LocationController {
  
     private final LocationService locationService;
