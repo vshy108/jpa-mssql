@@ -1,8 +1,6 @@
 # Getting Started
 
----
-
-### Spring Data JPA API Server
+## Spring Data JPA API Server
 
 This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers the following features:
 
@@ -32,6 +30,13 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
    - Configurable by changing the value of `cors.allowed.origins` in `application.properties`.
 
 ---
+
+## Steps
+
+1. Set up the environment variable `DB_PASS` with the SQL Server password for the TESTDB database. For example, in VSCode on macOS, run the command `export DB_PASS="password"`. Alternatively, you can replace `${DB_PASS}` in the `application.properties` file with your database password.
+2. If you plan to use SQL Server via Docker, you can obtain it by running the command: `docker pull mcr.microsoft.com/mssql/server:2022-latest`
+3. Don't forget to enable the Docker general setting "Use Rosetta for x86_64/amd64 emulation on Apple Silicon" if you're using an Apple Silicon processor.
+4. You can enhance your Spring framework support by installing Spring Tools 4 directly from https://spring.io/tools in your IDE.
 
 ### Reference Documentation
 For further reference, please consider the following sections:
