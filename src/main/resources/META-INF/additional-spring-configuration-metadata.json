@@ -1,12 +1,5 @@
-{"properties": [
-  {
-    "name": "cors.allowed.origins",
-    "type": "java.lang.String",
-    "description": "Allow React web applciation origin eg. http://localhost:5173"
-  },
-  {
-    "name": "api.key",
-    "type": "java.lang.String",
-    "description": "API key that needs to be provided in request header X-API-KEY"
-  }
-]}
+{"properties": [{
+  "name": "cors.allowed.origins",
+  "type": "java.lang.String",
+  "description": "Allow React web applciation origin eg. http://localhost:5173"
+}]}
