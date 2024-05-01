@@ -63,7 +63,8 @@ public class LocationService {
         boolean isValidColumnName = false;
 
         for (String sortableColumnName : Constant.GetAllLocationsSortableColumnNames) {
-            if (columnName == sortableColumnName) {
+            // NOTE: never compare strings with == in Java
+            if (columnName.equals(sortableColumnName)) {
                 isValidColumnName = true;
             }
         }
