@@ -20,10 +20,17 @@ public class ApiKeyAuthenticationFilter extends OncePerRequestFilter {
     @SuppressWarnings("null")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // NOTE: preflight request with OPTIONS method will not have X-API-KEY header 
+        if (request.getMethod().equals("OPTIONS")) {
+            // Allow access to the endpoint
+            filterChain.doFilter(request, response); 
+            return;
+        }
+
         String providedApiKey = request.getHeader("X-API-KEY");
 
         if (apiKey.equals(providedApiKey)) {
-            filterChain.doFilter(request, response); // Allow access to the endpoint
+            filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Invalid API key");
