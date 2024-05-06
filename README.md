@@ -18,7 +18,7 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
 4. **Transactional Support**:
    - Implements `@Transactional` in the `LocationService`.
 
-5. **Pagination**:
+5. **Pagination and Sorting**:
    - Supports pagination and sorting in the `getAllLocations` controller action.
 
 6. **Third-Party API Integration**:
@@ -33,6 +33,9 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
    - Compare API key from request header X-API-KEY
    - Configurable by changing the value of `api.key` in `application.properties`.
 
+8. **Controller Tests**:
+   - Verify the behavior of endpoints by examining their response status codes and attributes.
+
 ---
 
 ## Steps
@@ -41,6 +44,26 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
 2. If you plan to use SQL Server via Docker, you can obtain it by running the command: `docker pull mcr.microsoft.com/mssql/server:2022-latest`
 3. Don't forget to enable the Docker general setting "Use Rosetta for x86_64/amd64 emulation on Apple Silicon" if you're using an Apple Silicon processor.
 4. You can enhance your Spring framework support by installing Spring Tools 4 directly from https://spring.io/tools in your IDE.
+
+## Run tests
+1. Provide DB_PASS in test environment by adding
+
+  `"java.test.config": {
+    "env": {
+      "DB_PASS": "VALUE"
+    }
+  }`
+
+  to .vscode/settings.json if you are using VSCode.
+  After that, then you can run test by click on them.
+
+2. Or you can run the tests via `mvn test` after you append maven home to path such as
+   
+   `export M2_HOME=~/apache-maven-3.9.6`
+
+   `export PATH="${M2_HOME}/bin:$PATH"`
+   
+   in .zshrc of macOS.
 
 ### Reference Documentation
 For further reference, please consider the following sections:
