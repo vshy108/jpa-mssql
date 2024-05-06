@@ -24,6 +24,9 @@ public class Location {
   @Column(nullable = false)
   private boolean is_favourite = false;
 
+  // NOTE: cannot use com.h2database for test because below table creation error
+  // Caused by: org.h2.jdbc.JdbcSQLNonTransientException: 
+  // Unknown data type: "GEOGRAPHY"; SQL statement:
   @Convert(converter = SQLServerGeographyAttributeConverter.class)
   @Column(columnDefinition = "geography", nullable = false)
   private Point center;
