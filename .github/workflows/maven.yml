@@ -19,9 +19,16 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    services: 
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          SA_PASSWORD: ${{ vars.DB_PASS }}
+          ACCEPT_EULA: 'Y'
+          DBNAME: TESTDB
+        ports:
+        - 1433:1433
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
