@@ -9,7 +9,7 @@
 name: Java CI with Maven
 
 env:
-  DB_PASS: ${{ vars.DB_PASS }}
+  DB_PASS: 12345!@#QWEqwe
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       mssql:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          SA_PASSWORD: ${{ vars.DB_PASS }}
+          SA_PASSWORD: 12345!@#QWEqwe
           ACCEPT_EULA: 'Y'
           DBNAME: TESTDB
         ports:
