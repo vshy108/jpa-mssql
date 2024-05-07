@@ -11,9 +11,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -44,7 +46,7 @@ public class LocationControllerTest {
   }
 
   @Test
-  public void testSaveLocationEndpoint() throws Exception {
+  public void testSaveAndDeleteLocationEndpoint() throws Exception {
     // Generate a unique name for this test
     String uniqueName = "Location_" + UUID.randomUUID().toString().substring(0, 8);
     boolean isFavourite = true;
@@ -57,7 +59,7 @@ public class LocationControllerTest {
     );
     ObjectMapper objectMapper = new ObjectMapper();
 
-    mockMvc
+    MvcResult result = mockMvc
       .perform(
         MockMvcRequestBuilders
         .post("/api/v1/location")
@@ -72,7 +74,26 @@ public class LocationControllerTest {
       // lat is y
       .andExpect(MockMvcResultMatchers.jsonPath("$.center.x").value(2))
       // lng is x
-      .andExpect(MockMvcResultMatchers.jsonPath("$.center.y").value(1));
+      .andExpect(MockMvcResultMatchers.jsonPath("$.center.y").value(1))
+      .andReturn();
+
+    String json = result.getResponse().getContentAsString();
+
+    // Parse the JSON string
+    JsonNode rootNode = objectMapper.readTree(json);
+
+    // Extract the ID field from the JSON
+    JsonNode idNode = rootNode.get("id");
+    if (idNode != null && idNode.isNumber()) {
+        Long id = idNode.asLong();
+
+        mockMvc.perform(MockMvcRequestBuilders
+        .delete("/api/v1/locations/" + id)
+        .header("X-API-KEY", apiKey)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().isOk());
+    }
   }
 }
 
