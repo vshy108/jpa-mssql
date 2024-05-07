@@ -55,7 +55,7 @@ This server, built using Spring Data JPA (Java version 21, Maven 4.0.0), offers 
   }`
 
   to .vscode/settings.json if you are using VSCode.
-  After that, then you can run test by click on them.
+  After that, then you can run test by click on them with aid of Spring Tools 4 extension.
 
 2. Or you can run the tests via `mvn test` after you append maven home to path such as
    
