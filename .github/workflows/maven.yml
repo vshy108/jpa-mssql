@@ -9,7 +9,7 @@
 name: Java CI with Maven
 
 env:
-  DB_PASS: 12345!@#QWEqwe
+  DB_PASS: '12345!@#QWEqwe'
 
 on:
   push:
@@ -24,9 +24,10 @@ jobs:
       mssql:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          SA_PASSWORD: 12345!@#QWEqwe
+          SA_PASSWORD: '12345!@#QWEqwe'
           ACCEPT_EULA: 'Y'
-          DBNAME: TESTDB
+          MSSQL_PID: 'Express'
+          PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
         ports:
         - 1433:1433
     steps:
