@@ -40,6 +40,6 @@ jobs:
     - name: Set up Database
       run: |
         # Create the database if it does not exist
-        sqlcmd -S localhost -U SA -P '${{ vars.DB_PASS }}' -d master -Q "IF DB_ID('TESTDB') IS NULL BEGIN CREATE DATABASE TESTDB; END;"
+        sqlcmd -S localhost -U SA -P ${{ vars.DB_PASS }} -d master -Q "IF DB_ID('TESTDB') IS NULL BEGIN CREATE DATABASE TESTDB; END;"
     - name: Build with Maven
       run: mvn -B package --file pom.xml
