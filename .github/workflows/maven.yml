@@ -26,7 +26,7 @@ jobs:
     - name: Install SQL Server
       uses: Particular/install-sql-server-action@v1.0.0
       with:
-        connection-string-env-var: jdbc:sqlserver://;serverName=localhost;databaseName=TESTDB;user=SA;password=12345OHdf%e;encrypt=true;trustServerCertificate=true
+        connection-string-env-var: jdbc:sqlserver://;serverName=localhost;databaseName=TESTDB;user=sa;password=12345OHdf%e;encrypt=true;trustServerCertificate=true
         catalog: TESTDB
     - uses: actions/checkout@v4
     - name: Set up JDK 21
