@@ -6,10 +6,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+# TODO: refer to https://github.com/Particular/install-sql-server-action
+
 name: Java CI with Maven
 
 env:
-  DB_PASS: '12345!@#QWEqwe'
+  DB_PASS: '12345OHdf%e'
 
 on:
   push:
@@ -24,7 +26,7 @@ jobs:
       mssql:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          SA_PASSWORD: '12345!@#QWEqwe'
+          SA_PASSWORD: '12345OHdf%e'
           ACCEPT_EULA: 'Y'
           MSSQL_PID: 'Express'
           PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
