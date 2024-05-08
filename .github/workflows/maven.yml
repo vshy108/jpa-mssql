@@ -39,6 +39,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+    - name: Set up Database
+      run: |
+        # Connect to SQL Server and create database
+        sqlcmd -S localhost -U SA -P '12345OHdf%e' -Q "CREATE DATABASE TESTDB;"
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 

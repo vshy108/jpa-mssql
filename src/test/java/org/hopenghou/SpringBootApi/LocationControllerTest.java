@@ -44,7 +44,7 @@ public class LocationControllerTest {
   private String apiKey;
 
   @MockBean
-  LocationRepository locationRepository;
+  private LocationRepository locationRepository;
 
   private Location generateTestLocation(boolean isFavourite) {
     // Generate unique name
