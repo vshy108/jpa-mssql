@@ -6,8 +6,6 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-# TODO: refer to https://github.com/Particular/install-sql-server-action
-
 name: Java CI with Maven
 
 env:
@@ -41,8 +39,8 @@ jobs:
         cache: maven
     - name: Set up Database
       run: |
-        # Connect to SQL Server and create database
-        sqlcmd -S localhost -U SA -P '12345OHdf%e' -Q "CREATE DATABASE TESTDB;"
+        # Create the database if it does not exist
+        sqlcmd -S localhost -U SA -P '12345OHdf%e' -d master -Q "IF DB_ID('TESTDB') IS NULL BEGIN CREATE DATABASE TESTDB; END;"
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
